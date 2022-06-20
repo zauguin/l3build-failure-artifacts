@@ -15,7 +15,6 @@
   "license": "other",
   "dependencies": {
     "@actions/artifact": "^1.1.0",
-    "@actions/core": "^1.9.0",
-    "@actions/glob": "^0.3.0"
+    "@actions/core": "^1.9.0"
   }
 }
