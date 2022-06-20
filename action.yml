@@ -1,0 +1,17 @@
+name: 'l3build-failure-artifacts'
+description: 'Upload log files of failed l3build runs as artifacts'
+inputs:
+  path:
+    description: 'Path of the build directory'
+    required: false
+    default: 'build'
+  name:
+    description: 'Name of the artifact'
+    required: true
+  retention-days:
+    description: 'Duration after which the artifacts expire'
+    required: false
+    default: 90
+runs:
+  using: 'node16'
+  main: 'index.js'
