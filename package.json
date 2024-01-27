@@ -1,6 +1,6 @@
 {
   "name": "l3build-failure-artifacts",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Upload log files of failed l3build runs as artifacts",
   "main": "index.js",
   "type": "module",
