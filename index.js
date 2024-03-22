@@ -4,7 +4,9 @@ import {opendir} from 'node:fs/promises';
 import {join} from 'node:path';
 
 try {
-  const name = core.getInput('name');
+  // replace invalid characters in artifact name with underscore ('_')
+  // see https://github.com/actions/toolkit/blob/ef77c9d60bdb03700d7758b0d04b88446e72a896/packages/artifact/src/internal/upload/path-and-artifact-name-validation.ts
+  const name = core.getInput('name').replace(/[":<>|*?\r\n\\/]/g, '_');
   const options = {
     retentionDays: parseInt(core.getInput('retention-days'))
   };
