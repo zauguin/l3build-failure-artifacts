@@ -1,6 +1,6 @@
 {
   "name": "l3build-failure-artifacts",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Upload log files of failed l3build runs as artifacts",
   "main": "index.js",
   "type": "module",
@@ -14,7 +14,7 @@
   "author": "Marcel Krüger",
   "license": "other",
   "dependencies": {
-    "@actions/artifact": "^1.1.0",
+    "@actions/artifact": "^2.1.11",
     "@actions/core": "^1.9.0"
   }
 }
