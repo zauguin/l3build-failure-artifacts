@@ -1,7 +1,7 @@
 import core from '@actions/core';
-import artifact from '@actions/artifact';
-import {opendir} from 'node:fs/promises';
-import {join} from 'node:path';
+import { DefaultArtifactClient } from '@actions/artifact';
+import { opendir } from 'node:fs/promises';
+import { join } from 'node:path';
 
 try {
   const name = core.getInput('name');
@@ -17,7 +17,7 @@ try {
     if (entry.isDirectory() && entry.name.startsWith("test")) {
       const failures = new Set();
       const testdirname = join(path, entry.name);
-      var testdir = await opendir(testdirname);
+      const testdir = await opendir(testdirname);
       for await (const diffentry of testdir) {
         const match = diffentry.isFile() && /^((.*)\.[^\.]*)\.diff$/.exec(diffentry.name);
         if (match) {
@@ -25,7 +25,7 @@ try {
         }
       }
       if (failures.size > 0) {
-        testdir = await opendir(testdirname);
+        const testdir = await opendir(testdirname);
         for await (const diffentry of testdir) {
           const match = diffentry.isFile() && /^(.*)\.[^\.]*$/.exec(diffentry.name);
           if (match && failures.has(match[1])) {
@@ -37,11 +37,9 @@ try {
   }
 
   if (files.length > 0) {
-    const artifact_client = artifact.create();
-
-    const rootDirectory = path;
-    const uploadResponse = await artifact_client.uploadArtifact(name, files, path, options)
-    if (uploadResponse.failedItems.length > 0) {
+    const artifact = new DefaultArtifactClient()
+    const uploadResponse = await artifact.uploadArtifact(name, files, path, options)
+    if (uploadResponse.id === undefined) {
       core.setFailed('Failed to upload some test files. The artifact archive will be incomplete!');
     }
   }
