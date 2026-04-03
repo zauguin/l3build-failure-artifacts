@@ -1,4 +1,4 @@
-import core from '@actions/core';
+import * as core from '@actions/core';
 import { DefaultArtifactClient } from '@actions/artifact';
 import { opendir } from 'node:fs/promises';
 import { join } from 'node:path';
